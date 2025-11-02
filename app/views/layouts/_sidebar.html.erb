@@ -39,7 +39,40 @@
   </div>
   <div class="sidebar-menu">
     <ul class="menu">
-      <li class="sidebar-title">Menu</li>
+      <% sidebar_items.each do |item| %>
+        <% if item[:is_title] %>
+          <li class="sidebar-title"><%= item[:name] %></li>
+        <% else %>
+          <li class="sidebar-item <%= 'active' if request.path.starts_with?(item[:key]) %> <%= 'has-sub' if item[:submenu].any? %>">
+            <%= link_to(item[:url] || '#', class: 'sidebar-link') do %>
+              <i class="bi bi-<%= item[:icon] %>"></i>
+              <span><%= item[:name] %></span>
+            <% end %>
+            <% if item[:submenu].any? %>
+              <ul class="submenu">
+                <% item[:submenu].each do |sub| %>
+                  <li class="submenu-item <%= 'active' if request.path.starts_with?(sub[:key]) %> <%= 'has-sub' if sub[:submenu].any? %>">
+                    <%= link_to sub[:url], class: 'submenu-link' do %>
+                      <%= sub[:name] %>
+                    <% end %>
+                    <% if sub[:submenu].any? %>
+                      <ul class="submenu submenu-level-2">
+                        <% sub[:submenu].each do |subsub| %>
+                          <li class="submenu-item <%= 'active' if request.path == subsub[:url] %>">
+                            <%= link_to subsub[:url], class: 'submenu-link' do %>
+                              <%= subsub[:name] %>
+                            <% end %>
+                          </li>
+                        <% end %>
+                      </ul>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
     </ul>
   </div>
 </div>
