@@ -47,10 +47,15 @@ class Sidebar {
     // add event listener to sidebar
     document
       .querySelectorAll(".burger-btn")
-      .forEach((el) => el.addEventListener("click", this.toggle.bind(this)))
+      .forEach((el) => el.addEventListener("click", (e) => { 
+        this.toggle()
+        e.preventDefault()}))
     document
       .querySelectorAll(".sidebar-hide")
-      .forEach((el) => el.addEventListener("click", this.toggle.bind(this)))
+      .forEach((el) => el.addEventListener("click", (e) => { 
+        this.toggle.bind(this)
+        e.preventDefault()
+      }))
     window.addEventListener("resize", this.onResize.bind(this))
 
 
@@ -72,6 +77,7 @@ class Sidebar {
         .querySelector(".sidebar-link")
         .addEventListener("click", (e) => {
           e.preventDefault()
+          // e.stopPropagation()
           let submenu = sidebarItem.querySelector(".submenu")
           toggleSubmenu(submenu)
         })
@@ -264,24 +270,25 @@ const reInit_SubMenuHeight = (sidebarEl) => {
   }
 }
 
+// Motificado para atender a chamada via função initSidebar() para uso do turbo do rails
+// if (document.readyState !== 'loading') {
+//   onFirstLoad(sidebarEl)
+// }
+// else {
+//   window.addEventListener('DOMContentLoaded', () => onFirstLoad(sidebarEl))
+// }
+// /**
+//  * Create Sidebar Wrapper
+//  */
 
-if (document.readyState !== 'loading') {
-  onFirstLoad(sidebarEl)
-}
-else {
-  window.addEventListener('DOMContentLoaded', () => onFirstLoad(sidebarEl))
-}
-/**
- * Create Sidebar Wrapper
- */
+// // NOTE make Sidebar method as a global function
+// window.Sidebar = Sidebar
 
-// NOTE make Sidebar method as a global function
-window.Sidebar = Sidebar
-
-if (sidebarEl) {
-  // initialize
-  const sidebar = new window.Sidebar(sidebarEl)
-}
+// if (sidebarEl) {
+//   // initialize
+//   const sidebar = new window.Sidebar(sidebarEl)
+// }
+// Fim da modificação
 
 // NOTE use this to reinitialize sidebar with recalculate height
 // NOTE fixed dropdown smooth animation
@@ -290,4 +297,16 @@ const sidebar = new window.Sidebar(document.getElementById("sidebar"), {
   recalculateHeight: true
 }) 
 */
+// Agora o sidebar pode ser re-inicializado sob demanda (em cada navegação Turbo).
+export default function initSidebar() {
+  // if (window.sidebarInitialized) return;
+    // window.sidebarInitialized = true;
+
+  const sidebarEl = document.getElementById("sidebar");
+  if (!sidebarEl) return;
+
+  onFirstLoad(sidebarEl);
+  window.Sidebar = Sidebar;
+  new Sidebar(sidebarEl);
+}
 
