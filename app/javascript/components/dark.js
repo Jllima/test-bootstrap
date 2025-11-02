@@ -47,19 +47,40 @@ function initTheme() {
   return setTheme(mediaQuery.matches ? "dark" : "light", true)
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  const toggler = document.getElementById("toggle-dark")
-  const theme = localStorage.getItem(THEME_KEY)
+// window.addEventListener('DOMContentLoaded', () => {
+//   const toggler = document.getElementById("toggle-dark")
+//   const theme = localStorage.getItem(THEME_KEY)
 
-  if(toggler) {
-    toggler.checked = theme === "dark"
+//   if(toggler) {
+//     toggler.checked = theme === "dark"
     
-    toggler.addEventListener("input", (e) => {
-      setTheme(e.target.checked ? "dark" : "light", true)
-    })
+//     toggler.addEventListener("input", (e) => {
+//       setTheme(e.target.checked ? "dark" : "light", true)
+//     })
+//   }
+
+// });
+
+// initTheme()
+
+document.addEventListener("turbo:load", () => {
+  // Inicializa o tema
+  initTheme();
+
+  // Sincroniza o toggler
+  const toggler = document.getElementById("toggle-dark");
+  const theme = localStorage.getItem(THEME_KEY);
+
+  if (toggler) {
+    toggler.checked = theme === "dark";
+
+    // Remove listeners antigos para evitar duplicação
+    toggler.replaceWith(toggler.cloneNode(true));
+    const newToggler = document.getElementById("toggle-dark");
+
+    newToggler.addEventListener("input", (e) => {
+      setTheme(e.target.checked ? "dark" : "light", true);
+    });
   }
-
 });
-
-initTheme()
 
