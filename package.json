@@ -2,16 +2,7 @@
   "name": "app",
   "private": true,
   "devDependencies": {
-    "esbuild": "^0.25.11",
-    "bestzip": "^2.2.1",
-    "browser-sync": "^2.27.11",
-    "browser-sync-webpack-plugin": "^2.3.0",
-    "postcss": "^8.4.20",
-    "prettier": "^3.0.3",
-    "release-it": "^15.5.1",
-    "resolve-url-loader": "^5.0.0",
-    "sass": "^1.67.0",
-    "sass-loader": "^13.2.0"
+    "esbuild": "^0.25.11"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
