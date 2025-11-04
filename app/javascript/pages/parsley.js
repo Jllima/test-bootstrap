@@ -3,7 +3,7 @@ $.extend(window.Parsley.options, {
   excluded:
     "input[type=button], input[type=submit], input[type=reset], .search, .ignore",
   triggerAfterFailure: "change blur",
-  errorsContainer: function (element) {},
+  // errorsContainer: function (element) {},
   trigger: "change",
   successClass: "is-valid",
   errorClass: "is-invalid",

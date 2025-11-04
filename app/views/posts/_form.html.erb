@@ -1,4 +1,4 @@
-<%= form_with(model: post, html: {data: {parsley_validate: true}}) do |form| %>
+<%= form_with(model: post, class: "form", data: { parsley_validate: true }) do |form| %>
   <% if post.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -19,11 +19,11 @@
     <div class="col-md-6 col-12">
       <div class="form-group">
         <%= form.label :desc %>
-        <%= form.text_field :desc, class: "form-control", placeholder: "Descrição" %>
+        <%= form.text_field :desc, class: "form-control", placeholder: "Descrição", data: {parsley_required: "true"} %>
       </div>
     </div>
     <div class="col-12 d-flex justify-content-end">
-      <%= form.submit "Cadastrar", class: "btn btn-primary" %>
+      <%= form.submit "Cadastrar", class: "btn btn-primary me-1 mb-1" %>
     </div>
   </div>
 <% end %>

@@ -8,4 +8,4 @@ import "./mazer"
 import "./initTheme"
 import "jquery"
 import "parsleyjs"
-
+// import "./pages/parsley"
