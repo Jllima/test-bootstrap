@@ -1,11 +1,26 @@
-// Entry point for the build script in your package.json
 import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap"
 import featherIcons from "feather-icons"
-featherIcons.replace()
 import "./mazer"
 import "./initTheme"
-import "jquery"
+
+// jQuery precisa vir antes do Parsley
+// expoerta jQuery para o escopo global
+import $ from "jquery"
+window.$ = $
+window.jQuery = $
+
+
+featherIcons.replace()
+// Agora importa Parsley
 import "parsleyjs"
-// import "./pages/parsley"
+
+import "./pages/parsley"
+// Inicializações gerais
+document.addEventListener("turbo:load", () => {
+  featherIcons.replace()
+
+  // Inicializa Parsley em todos os formulários marcados
+  $("form[data-parsley-validate]").parsley()
+})

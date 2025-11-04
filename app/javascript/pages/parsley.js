@@ -1,3 +1,4 @@
+document.addEventListener("turbo:load", () => {
 $.extend(window.Parsley.options, {
   focus: "first",
   excluded:
@@ -52,4 +53,5 @@ Parsley.addValidator("restrictedCity", {
   messages: {
     en: 'You have to live in <a href="https://www.google.com/maps/place/Jakarta">Jakarta</a>.',
   },
+})
 })
