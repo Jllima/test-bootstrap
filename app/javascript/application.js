@@ -6,3 +6,6 @@ import featherIcons from "feather-icons"
 featherIcons.replace()
 import "./mazer"
 import "./initTheme"
+import "jquery"
+import "parsleyjs"
+
