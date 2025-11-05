@@ -11,16 +11,15 @@ import $ from "jquery"
 window.$ = $
 window.jQuery = $
 
-
 featherIcons.replace()
 // Agora importa Parsley
-import "parsleyjs"
+// import "parsleyjs"
 
-import "./pages/parsley"
-// Inicializações gerais
-document.addEventListener("turbo:load", () => {
-  featherIcons.replace()
+// import "./pages/parsley"
+// // Inicializações gerais
+// document.addEventListener("turbo:load", () => {
+//   featherIcons.replace()
 
-  // Inicializa Parsley em todos os formulários marcados
-  $("form[data-parsley-validate]").parsley()
-})
+//   // Inicializa Parsley em todos os formulários marcados
+//   $("form[data-parsley-validate]").parsley()
+// })
